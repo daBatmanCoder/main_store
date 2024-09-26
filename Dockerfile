@@ -1,14 +1,8 @@
-# Use an official lightweight Nginx image
+# Use Nginx as the base image
 FROM nginx:alpine
 
-# Remove the default nginx static assets
-RUN rm -rf /usr/share/nginx/html/*
+# Copy the HTML file to the default Nginx directory
+COPY index.html /usr/share/nginx/html/index.html
 
-# Copy static assets from your project folder to the container
-COPY . /usr/share/nginx/html
-
-# Expose port 80
+# Expose port 80 to the outside world
 EXPOSE 80
-
-# Start Nginx and keep it running in the foregroun
-CMD ["nginx", "-g", "daemon off;"]
